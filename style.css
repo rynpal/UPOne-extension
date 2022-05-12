@@ -25,6 +25,7 @@
     position: fixed;
     top: 6%;
     right: 5px;
+    cursor: pointer;
 }
 
 .extension-button {

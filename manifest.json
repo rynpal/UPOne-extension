@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "Ryan's UP One Extension",
+    "name": "UP One Extension",
     "version": "0.1",
     "content_scripts": [
         {
