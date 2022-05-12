@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name": "Ryan's UP One Extension",
+    "version": "0.1",
+    "content_scripts": [
+        {
+          "matches": [
+            "http://192.168.201.11/upone/MF/Production/Details/*"
+          ],
+          "js": ["jquery-3.6.0.min.js","content.js"],
+          "css": ["style.css"]
+        }
+      ]
+}

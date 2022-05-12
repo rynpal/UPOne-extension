@@ -1,0 +1,36 @@
+#extension-button-container {
+    position: fixed;
+    top: 40%;
+    right: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+#material-display {
+    border: 3px solid black;
+    position: fixed;
+    top: 10%;
+    right: 5px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 10px;
+    width: 400px;
+    height: 25%;
+    background-color: white;
+    z-index: 100;
+}
+
+#hideShow {
+    position: fixed;
+    top: 6%;
+    right: 5px;
+}
+
+.extension-button {
+    background-color: blue;
+    color: white;
+    border: none;
+    margin: 2px;
+}
+
