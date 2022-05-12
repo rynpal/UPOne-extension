@@ -1,4 +1,4 @@
-
+//DOCUMENT READY, RENDER WINDOW, GET MATERIAL INFO
 $('document').ready(function(){
     addDisplay()
     getMaterials()
@@ -49,12 +49,6 @@ function hideShow(){
     $('#material-display').toggle()
 }
 
-//CLICK FIRST PRODUCTION LINK
-// function openProd (){
-//     let prodTag = $("a[href='/upone/MF/Production']")
-//     prodTag[0].click()
-// }
-
 //OPEN PRODUCTION PARTICULARS (FIRST PRODUCTION PARTICULAR IS OPEN BY DEFAULT)
 function openParticulars() {
     if(!headerOpen) {
@@ -79,7 +73,7 @@ function particularMath(gridRows,i){
 
 function displayMaterials(obj) {
     let arr = Object.entries(obj)
-    let table = "<table border='1'><tr><td style='font-weight: bold'>Material</td><td style='font-weight: bold'>Width</td><td style='font-weight: bold'>Quantity</td></tr>"
+    let table = "<table border='1'><tr style='font-weight: bold'><td>Material</td><td>Width</td><td >Quantity</td></tr>"
         for(let i = 0; i < arr.length; i++) {
             let item = arr[i][0].slice(0,arr[i][0].indexOf(' WIDTH'))
             let width = arr[i][0].slice(arr[i][0].indexOf(':')+1)
@@ -108,7 +102,7 @@ function getMaterials(){
             thickness = " W" + parseInt(gridRows[i].children[itemThickIndex].innerText)
         }
         //WIDTH
-        let width = ' WIDTH:' + parseInt(gridRows[i].children[itemWidthIndex].innerText)
+        let width = ' WIDTH:' + parseInt(gridRows[i].children[itemWidthIndex].innerText.replace(',',''))
         //CONCATENATE IDENTIFIER
         let key = gridRows[i].children[itemNameIndex].innerText + thickness + width
         //NET INPUT QUANTITY
