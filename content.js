@@ -1,6 +1,6 @@
 
 $('document').ready(function(){
-    addButtons()
+    addDisplay()
     getMaterials()
 });
 
@@ -44,9 +44,8 @@ for(let i = 0; i < itemRow.length; i++){
     }
 }
 
-//HIDE MATERIAL WINDOW AND BUTTONS
+//HIDE MATERIAL WINDOW
 function hideShow(){
-    $('#extension-button-container').toggle()
     $('#material-display').toggle()
 }
 
@@ -136,29 +135,13 @@ function getMaterials(){
 
 
 //DEFINE ELEMENTS TO BE RENDERED ON THE PAGE
-const materialDisplay = `<div id='material-display'></div>`
-
-const buttons = `
-                <a id='hideShow'>Hide/Show</a>
-                <div id='extension-button-container'>
-                    <button class ='extension-button' id='getMaterials'>Get Materials</button>
-                </div>
-                `
+const materialDisplay = `<div id='material-display'></div><a id ='hideShow'>Hide/Show</a>`
 
 //RENDER ELEMENTS AND ASSIGN BUTTON CLICKS
-function addButtons() {
-    $('body').append(materialDisplay).append(buttons)
+function addDisplay() {
+    $('body').append(materialDisplay)
     $('#hideShow').click(function(){
         hideShow()
-    })
-    // $('#openProd').click(function(){
-    //     openProd()
-    // })
-    // $('#openParticulars').click(function(){
-    //     openParticulars()
-    // })
-    $('#getMaterials').click(function(){
-        getMaterials()
     })
 }
 
