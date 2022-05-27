@@ -14,6 +14,7 @@ let itemRow =
   inputMatIndex =
   remainMatIndex =
   resultQuantityIndex =
+  resultLotIndex =
     null);
 
 //PARTICULARS OPENED BY DEFAULT
@@ -73,6 +74,12 @@ for (let i = 0; i < resultRow.length; i++) {
   ) {
     resultQuantityIndex = i;
   }
+  if (
+    resultRow[i].textContent.includes("Lot No/Case No") &&
+    resultLotIndex == null
+  ) {
+    resultLotIndex = i;
+  }
 }
 
 //HIDE MATERIAL WINDOW
@@ -106,7 +113,7 @@ function particularMath(gridRows, i) {
   }
 }
 
-function displayMaterials(obj, int) {
+function displayMaterials(obj, int, str) {
   let arr = Object.entries(obj);
   let table =
     "<table border='1'><tr style='font-weight: bold'><td>Material</td><td>Width</td><td >Quantity</td></tr>";
@@ -119,6 +126,7 @@ function displayMaterials(obj, int) {
   }
 
   table += `</table><br><p>Finishing Quantity: ${int}</p>`;
+  table += `<br><p>Lot List:</p><p>${str}</p>`;
 
   $("#material-display").append(table);
 }
@@ -128,6 +136,8 @@ function getMaterials() {
   let inputMat = [];
   let matList = {};
   let resultMat = 0;
+  let lotList = [];
+  let lotRange = "";
 
   let gridRows = document.querySelectorAll(".pq-grid-row");
 
@@ -156,14 +166,18 @@ function getMaterials() {
     inputMat.push([key, mat]);
   }
 
-  //SUM UP FINISHED QUANTITIES
+  //SUMMARIZE FINISHED LOTS
   for (let i = 0; i < gridRows.length; i++) {
     if (gridRows[i].children.length < 19 || gridRows[i].children.length > 20)
       continue;
+    //SUM UP FINISHED QUANTITIES
     resultMat += parseInt(
       gridRows[i].children[resultQuantityIndex].innerText.replace(",", "")
     );
+    lotList.push(gridRows[i].children[resultLotIndex].innerText);
   }
+
+  lotRange = lotList[0] + " - " + lotList[lotList.length - 1];
 
   for (let i = 0; i < inputMat.length; i++) {
     if (!(inputMat[i][0] in matList)) {
@@ -174,7 +188,7 @@ function getMaterials() {
     }
   }
 
-  displayMaterials(matList, resultMat);
+  displayMaterials(matList, resultMat, lotRange);
 }
 
 //DEFINE ELEMENTS TO BE RENDERED ON THE PAGE
