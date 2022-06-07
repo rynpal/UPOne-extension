@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "UP One Extension Testing",
+  "name": "UP One Extension",
   "version": "0.1.2",
   "content_scripts": [
     {
