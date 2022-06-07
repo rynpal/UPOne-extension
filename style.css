@@ -1,15 +1,27 @@
 #material-display {
     border: 3px solid black;
     position: fixed;
-    top: 10%;
+    top: 20%;
     right: 5px;
     display: flex;
     flex-direction: column;
-    text-align: center;
+    text-align: left;
     margin-top: 10px;
     width: 20%;
+    min-width: 300px;
     background-color: white;
     z-index: 100;
+}
+
+#material-display > table, .data-row, .data-row > td {
+    text-align: center;
+    border: 1px solid black;
+    padding: 3px;
+}
+
+#blank-row {
+    height: 2px !important;
+    background-color: black;
 }
 
 #hideShow {

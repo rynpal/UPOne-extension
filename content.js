@@ -113,20 +113,23 @@ function particularMath(gridRows, i) {
   }
 }
 
-function displayMaterials(obj, int, str) {
+function displayMaterials(obj, int, str, color) {
   let arr = Object.entries(obj);
   let table =
-    "<table border='1'><tr style='font-weight: bold'><td>Material</td><td>Width</td><td >Quantity</td></tr>";
+    "<table><tr class='data-row' style='font-weight: bold'><td>Material</td><td>Width</td><td >Quantity</td></tr>";
   for (let i = 0; i < arr.length; i++) {
     let item = arr[i][0].slice(0, arr[i][0].indexOf(" WIDTH"));
     let width = arr[i][0].slice(arr[i][0].indexOf(":") + 1);
-    table += `
-                        <tr><td>${item}</td><td>${width}</td><td>${arr[i][1]}</td></tr>
-                        `;
+    table += `<tr class='data-row'><td>${item}</td><td>${width}</td><td>${arr[i][1]}</td></tr>`;
   }
-
-  table += `</table><br><p>Finishing Quantity: ${int}</p>`;
-  table += `<br><p>Lot List:</p><p>${str}</p>`;
+  table += `<tr id="blank-row"><td colspan="3"></td></tr>`;
+  table += `<tr class = 'data-row'><td>Finishing Quantity</td><td colspan="2">${int}</td></tr>`;
+  table += `<tr id="blank-row"><td colspan="3"></td></tr>`;
+  table += `<tr class = 'data-row'><td>Lot List: ${str}</td>`;
+  if (color) {
+    table += `<td colspan="2">Colors: ${color}</td>`;
+  }
+  table += `</tr></table>`;
 
   $("#material-display").append(table);
 }
@@ -138,6 +141,7 @@ function getMaterials() {
   let resultMat = 0;
   let lotList = [];
   let lotRange = "";
+  let colors = null;
 
   let gridRows = document.querySelectorAll(".pq-grid-row");
 
@@ -177,8 +181,6 @@ function getMaterials() {
     lotList.push(gridRows[i].children[resultLotIndex].innerText);
   }
 
-  lotRange = lotList[0] + " - " + lotList[lotList.length - 1];
-
   for (let i = 0; i < inputMat.length; i++) {
     if (!(inputMat[i][0] in matList)) {
       matList[inputMat[i][0]] = 0;
@@ -188,7 +190,19 @@ function getMaterials() {
     }
   }
 
-  displayMaterials(matList, resultMat, lotRange);
+  //CREATE PRODUCED LOT RANGE FROM WORK ORDER
+  if (lotList.length == 1) {
+    lotRange = lotList[0];
+  } else {
+    lotRange = lotList[0] + " - " + lotList[lotList.length - 1];
+  }
+
+  //RETURN PRINTING COLORS
+  if (document.querySelector("#ChangedCylinderQty").value) {
+    colors = document.querySelector("#ChangedCylinderQty").value;
+  }
+
+  displayMaterials(matList, resultMat, lotRange, colors);
 }
 
 //DEFINE ELEMENTS TO BE RENDERED ON THE PAGE
