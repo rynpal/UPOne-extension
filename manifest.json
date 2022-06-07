@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "UP One Extension",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "content_scripts": [
     {
       "matches": ["http://192.168.201.11/upone/MF/Production/Details/*"],
