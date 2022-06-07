@@ -1,11 +1,3 @@
-#extension-button-container {
-    position: fixed;
-    top: 40%;
-    right: 5px;
-    display: flex;
-    flex-direction: column;
-}
-
 #material-display {
     border: 3px solid black;
     position: fixed;
@@ -15,8 +7,7 @@
     flex-direction: column;
     text-align: center;
     margin-top: 10px;
-    width: 400px;
-    height: 25%;
+    width: 20%;
     background-color: white;
     z-index: 100;
 }
@@ -26,12 +17,5 @@
     top: 6%;
     right: 5px;
     cursor: pointer;
-}
-
-.extension-button {
-    background-color: blue;
-    color: white;
-    border: none;
-    margin: 2px;
 }
 
