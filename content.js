@@ -113,7 +113,7 @@ function particularMath(gridRows, i) {
   }
 }
 
-function displayMaterials(obj, int, str, color) {
+function displayMaterials(obj, int, str) {
   let arr = Object.entries(obj);
   let table =
     "<table><tr class='data-row' style='font-weight: bold'><td>Material</td><td>Width</td><td >Quantity</td></tr>";
@@ -125,11 +125,7 @@ function displayMaterials(obj, int, str, color) {
   table += `<tr id="blank-row"><td colspan="3"></td></tr>`;
   table += `<tr class = 'data-row'><td>Finishing Quantity</td><td colspan="2">${int}</td></tr>`;
   table += `<tr id="blank-row"><td colspan="3"></td></tr>`;
-  table += `<tr class = 'data-row'><td>Lot List: ${str}</td>`;
-  if (color) {
-    table += `<td colspan="2">Colors: ${color}</td>`;
-  }
-  table += `</tr></table>`;
+  table += `<tr class = 'data-row'><td>Lot List: ${str}</td></tr></table>`;
 
   $("#material-display").append(table);
 }
@@ -141,7 +137,6 @@ function getMaterials() {
   let resultMat = 0;
   let lotList = [];
   let lotRange = "";
-  let colors = null;
 
   let gridRows = document.querySelectorAll(".pq-grid-row");
 
@@ -191,18 +186,15 @@ function getMaterials() {
   }
 
   //CREATE PRODUCED LOT RANGE FROM WORK ORDER
-  if (lotList.length == 1) {
-    lotRange = lotList[0];
-  } else {
-    lotRange = lotList[0] + " - " + lotList[lotList.length - 1];
+  if (lotList[0]) {
+    if (lotList.length == 1) {
+      lotRange = lotList[0];
+    } else {
+      lotRange = lotList[0] + " - " + lotList[lotList.length - 1];
+    }
   }
 
-  //RETURN PRINTING COLORS
-  if (document.querySelector("#ChangedCylinderQty").value) {
-    colors = document.querySelector("#ChangedCylinderQty").value;
-  }
-
-  displayMaterials(matList, resultMat, lotRange, colors);
+  displayMaterials(matList, resultMat, lotRange);
 }
 
 //DEFINE ELEMENTS TO BE RENDERED ON THE PAGE
